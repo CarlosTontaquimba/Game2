@@ -15,6 +15,9 @@ public class GameController : MonoBehaviour
     public GameObject player;
     public GameObject enemyGenerator;
     private AudioSource musicPlayer;
+    //Gestionar puntos 
+    public int points =0;
+    public Text pointsText;
     
     //Aumentar nivel de dificultad
     public float scaleTime = 6f;//cada cuanto se increenta el ritmo de juego
@@ -76,5 +79,11 @@ public class GameController : MonoBehaviour
         CancelInvoke("GameTimeScale");
         Time.timeScale= newTimeScale;
         Debug.Log("Ritmo reestablecido "+ Time.timeScale.ToString());
+    }
+    //Metodo para gestionar los puntos 
+    public void IncreasePoints()
+    {
+        points++;
+        pointsText.text = points.ToString();    
     }
 }

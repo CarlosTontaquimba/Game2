@@ -55,6 +55,9 @@ public class PlayerController : MonoBehaviour
             game.GetComponent<AudioSource>().Stop();
             audioPlayer.clip = dieClip;
             audioPlayer.Play();
+        }else if (other.gameObject.tag == "Point")
+        {
+            game.SendMessage("IncreasePoints");
         }
     }
      void GameReady()
