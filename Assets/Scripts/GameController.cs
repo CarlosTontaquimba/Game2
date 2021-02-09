@@ -16,6 +16,10 @@ public class GameController : MonoBehaviour
     public GameObject enemyGenerator;
     private AudioSource musicPlayer;
     
+    //Aumentar nivel de dificultad
+    public float scaleTime = 6f;//cada cuanto se increenta el ritmo de juego
+    public float scaleInc = 0.25f;//Cantidad de aumento de ritmo de juego 
+    //************************
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +39,8 @@ public class GameController : MonoBehaviour
             player.SendMessage("UpdateState","PlayerRun");
             enemyGenerator.SendMessage("StartGenerator");
             musicPlayer.Play();
+            // Invocar que se repita 
+            InvokeRepeating("GameTimeScale",scaleTime,scaleTime);
         }else if (gameState == GameState.Playing)
         {
             Parallax();
@@ -56,6 +62,19 @@ public class GameController : MonoBehaviour
     }
     public void RestartGame()
     {
+        ResetTimeScale();
         SceneManager.LoadScene("Principal");
+    }
+    void GameTimeScale ()
+    {
+        Time.timeScale += scaleInc;
+        Debug.Log("Ritmo incrementado" + Time.timeScale.ToString());
+    }
+    //Para que el ritmo de juego se resetee y velva a velocidad normal cuando moramos
+    public void ResetTimeScale(float newTimeScale = 1f)
+    {
+        CancelInvoke("GameTimeScale");
+        Time.timeScale= newTimeScale;
+        Debug.Log("Ritmo reestablecido "+ Time.timeScale.ToString());
     }
 }
