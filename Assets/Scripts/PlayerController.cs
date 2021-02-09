@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     private AudioSource audioPlayer;
     public AudioClip jumpClip;
     public AudioClip dieClip;
+    public AudioClip pointClip;
     private Animator animator;
     //Reprdcir sonido mientras se toca el suelo
     private float startY;
@@ -58,6 +59,8 @@ public class PlayerController : MonoBehaviour
         }else if (other.gameObject.tag == "Point")
         {
             game.SendMessage("IncreasePoints");
+            audioPlayer.clip = pointClip;
+            audioPlayer.Play();
         }
     }
      void GameReady()

@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
     public RawImage platform, background;
     public GameState gameState = GameState.Idle;
     public GameObject uiIdle;
+    public GameObject uiScore;
     public GameObject player;
     public GameObject enemyGenerator;
     private AudioSource musicPlayer;
@@ -39,6 +40,7 @@ public class GameController : MonoBehaviour
             gameState = GameState.Playing;
             //Desactiva u oculta el texto si inicia el juego
             uiIdle.SetActive(false);
+            uiScore.SetActive(true);
             player.SendMessage("UpdateState","PlayerRun");
             enemyGenerator.SendMessage("StartGenerator");
             musicPlayer.Play();
